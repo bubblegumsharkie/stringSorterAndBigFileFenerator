@@ -27,7 +27,7 @@ public class FileSorter {
         HashMap<String, Integer> passedLetters = new HashMap<>();
         int amountOfSupportedLinesInFile = AppConfig.getMaximumAmountOfSupportedLinesInFile();
         int amountLine = AppConfig.getAmountOfGeneratedLines();
-        int sizePartLine = AppConfig.getAmountOfCharsToSort();
+        int sizePartLine = AppConfig.getAmountOfCharsToGroupBy();
         String pathToFile = file.getAbsolutePath();
 
         if (amountLine < amountOfSupportedLinesInFile) {
@@ -70,8 +70,8 @@ public class FileSorter {
             fileService.delete(pathToTemp + tmp + ".txt");
         });
         try {
-            FileUtils.copyFile(new File(pathToTemp + "file.txt"), new File(pathToResultFile));
-            fileService.delete(pathToTemp + "file.txt");
+            FileUtils.copyFile(new File(pathToTemp + AppConfig.getGeneratedFileName()), new File(pathToResultFile));
+            fileService.delete(pathToTemp + AppConfig.getGeneratedFileName());
         } catch (IOException e) {
             System.out.println("[INFO] Temp folder deleted");
         }
@@ -85,7 +85,8 @@ public class FileSorter {
                 FileReader fileReader = new FileReader(tempFile);
                 BufferedReader bufferedReader = new BufferedReader(fileReader)
         ) {
-            fileService.write(pathToResultFile, bufferedReader.readLine(), true);
+//            fileService.write(pathToResultFile, bufferedReader.readLine(), true);
+            bufferedReader.lines().forEach(l -> fileService.write(pathToResultFile, l, true));
         } catch (FileNotFoundException e) {
             System.out.println("[ERROR] File not found");
             e.printStackTrace();

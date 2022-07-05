@@ -15,6 +15,6 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("[INFO] Launching the application");
         fileGenerator.generateFile(AppConfig.isGenerated());
-        fileSorter.sortFile(new File(AppConfig.getSourceFileName()));
+        fileSorter.sortFile(new File(AppConfig.getSourceFileNamePath()));
     }
 }

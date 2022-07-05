@@ -11,17 +11,17 @@ public class FileGenerator {
     }
 
     public String generateRandomString(int maxLineLength) {
-        return RandomStringUtils.randomAlphanumeric(AppConfig.getAmountOfCharsToSort(), maxLineLength).toLowerCase();
+        return RandomStringUtils.randomAlphanumeric(AppConfig.getAmountOfCharsToGroupBy(), maxLineLength).toLowerCase();
     }
 
     public void generateFile(boolean generate) {
         if (generate) {
             System.out.println("[INFO] Deleting the previous generated input file");
-            fileService.delete(AppConfig.getSourceFileName());
-            fileService.createFile(AppConfig.getSourceFileName());
+            fileService.delete(AppConfig.getSourceFileNamePath());
+            fileService.createFile(AppConfig.getSourceFileNamePath());
             for (int i = 0; i < AppConfig.getAmountOfGeneratedLines(); i++) {
                 fileService.write(
-                        AppConfig.getSourceFileName(),
+                        AppConfig.getSourceFileNamePath(),
                         generateRandomString(AppConfig.getMaxGeneratedLineLength()),
                         true);
             }
