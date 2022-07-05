@@ -1,5 +1,7 @@
 package org.qualificationassignment.services;
 
+import org.qualificationassignment.config.AppConfig;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,20 +10,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileService {
-    String sourceFilePath = "./src/files";
-    String sourceFileName = sourceFilePath + "/file.txt";
 
     public void createFile() {
         try {
-            Files.createDirectories(Paths.get(sourceFilePath));
-            File myFile = new File(sourceFileName);
+            Files.createDirectories(Paths.get(AppConfig.getSourceFilePath()));
+            File myFile = new File(AppConfig.getSourceFileName());
             if (myFile.createNewFile()) {
                 System.out.println("File created: " + myFile.getName());
             } else {
                 System.out.println("File already exists");
             }
         } catch (IOException e) {
-            System.out.println("[ERROR] An unhandled error occurred while creating file");
+            System.out.println("[ERROR] [READ] An unhandled error occurred while creating file");
             e.printStackTrace();
         }
     }
@@ -34,7 +34,7 @@ public class FileService {
             bufferedWriter.write(line + "\n");
             System.out.println("The \"" + line + "\" string is successfully written to the " + filename);
         } catch (IOException e) {
-            System.out.println("[ERROR] An unhandled error occurred while creating file");
+            System.out.println("[ERROR] [WRITE] An unhandled error occurred while writing file");
             e.printStackTrace();
         }
     }
