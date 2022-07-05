@@ -31,7 +31,7 @@ public class FileSorter {
         String pathToFile = file.getAbsolutePath();
 
         if (amountLine < amountOfSupportedLinesInFile) {
-            System.out.println("[FILE SORTER] The file is size is small enough to process. Starting sorting process");
+            System.out.println("[FILE SORTER] The file is small enough to work with. Starting sorting process");
             sortLineToFile(pathToFile);
         } else {
             System.out.println("[FILE SORTER] The file size exceeds limit of processing. Trying to divide it to smaller files");
@@ -106,7 +106,7 @@ public class FileSorter {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (line.length() - 1 < sizePartLine) {
-                    passedLetters.put(line.toLowerCase(Locale.ROOT), +1);
+                    passedLetters.put(line.toLowerCase(Locale.ROOT), 1);
                     String fileName = line.toLowerCase(Locale.ROOT) + ".txt";
                     fileService.createFile(pathToTemp + fileName);
                     fileService.write(pathToTemp + fileName, line, true);
