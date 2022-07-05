@@ -14,15 +14,19 @@ public class FileGenerator {
         return RandomStringUtils.randomAlphanumeric(AppConfig.getAmountOfCharsToSort(), maxLineLength).toLowerCase();
     }
 
-    public void generateFile() {
-        System.out.println("[INFO] Deleting the previous generated input file");
-        fileService.delete(AppConfig.getSourceFileName());
-        fileService.createFile(AppConfig.getSourceFileName());
-        for (int i = 0; i < AppConfig.getAmountOfGeneratedLines(); i++) {
-            fileService.write(
-                    AppConfig.getSourceFileName(),
-                    generateRandomString(AppConfig.getMaxGeneratedLineLength()),
-                    true);
+    public void generateFile(boolean generate) {
+        if (generate) {
+            System.out.println("[INFO] Deleting the previous generated input file");
+            fileService.delete(AppConfig.getSourceFileName());
+            fileService.createFile(AppConfig.getSourceFileName());
+            for (int i = 0; i < AppConfig.getAmountOfGeneratedLines(); i++) {
+                fileService.write(
+                        AppConfig.getSourceFileName(),
+                        generateRandomString(AppConfig.getMaxGeneratedLineLength()),
+                        true);
+            }
+        } else {
+            System.out.println("Proceeding with the provided input file");
         }
     }
 

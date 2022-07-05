@@ -5,6 +5,7 @@ public class AppConfig {
     static private final String SOURCE_FILE_NAME = PROGRAM_FILES_PATH + "file.txt";
     static private final String TEMP_FILE_PATH = PROGRAM_FILES_PATH + "tmp/";
     static private final String FINAL_FILE_PATH = PROGRAM_FILES_PATH + "final.txt";
+    static private final boolean IS_GENERATED = true;
     static private final int maxGeneratedLineLength = 300;
     static private final int amountOfGeneratedLines = 10000;
     static private final int maximumAmountOfSupportedLinesInFile = 5000;
@@ -12,6 +13,9 @@ public class AppConfig {
 
     public static String getProgramFilesPath() {
         return PROGRAM_FILES_PATH;
+    }
+    public static boolean isGenerated() {
+        return IS_GENERATED;
     }
 
     public static String getSourceFileName() {
