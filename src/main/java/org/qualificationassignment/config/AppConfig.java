@@ -21,10 +21,6 @@ public class AppConfig {
         return GENERATED_FILE_NAME;
     }
 
-    public static String getSortedFileName() {
-        return SORTED_FILE_NAME;
-    }
-
     public static boolean isGenerated() {
         return IS_GENERATED;
     }
