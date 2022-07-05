@@ -11,9 +11,10 @@ public class Main {
     static FileService fileService = new FileService();
     static FileGenerator fileGenerator = new FileGenerator(fileService);
     static FileSorter fileSorter = new FileSorter(fileService);
+
     public static void main(String[] args) {
         System.out.println("[INFO] Launching the application");
-//        fileGenerator.generateFile();
+        fileGenerator.generateFile();
         fileSorter.sortFile(new File(AppConfig.getSourceFileName()));
     }
 }
