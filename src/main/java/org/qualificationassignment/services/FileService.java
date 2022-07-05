@@ -1,5 +1,6 @@
 package org.qualificationassignment.services;
 
+import org.apache.commons.io.FileUtils;
 import org.qualificationassignment.config.AppConfig;
 
 import java.io.BufferedWriter;
@@ -11,10 +12,11 @@ import java.nio.file.Paths;
 
 public class FileService {
 
-    public void createFile() {
+    public void createFile(String filePath) {
         try {
-            Files.createDirectories(Paths.get(AppConfig.getSourceFilePath()));
-            File myFile = new File(AppConfig.getSourceFileName());
+            Files.createDirectories(Paths.get(AppConfig.getProgramFilesPath()));
+            Files.createDirectories(Paths.get(AppConfig.getTempFilePath()));
+            File myFile = new File(filePath);
             if (myFile.createNewFile()) {
                 System.out.println("File created: " + myFile.getName());
             } else {
@@ -26,16 +28,34 @@ public class FileService {
         }
     }
 
-    public void write(String filename, String line, boolean append) {
+    public void write(String filePath, String line, boolean append) {
         try (
-                FileWriter file = new FileWriter(filename, append);
+                FileWriter file = new FileWriter(filePath, append);
                 BufferedWriter bufferedWriter = new BufferedWriter(file)
         ) {
             bufferedWriter.write(line + "\n");
-            System.out.println("The \"" + line + "\" string is successfully written to the " + filename);
         } catch (IOException e) {
             System.out.println("[ERROR] [WRITE] An unhandled error occurred while writing file");
             e.printStackTrace();
         }
     }
+
+    public void delete(String filePath) {
+        try {
+            Files.deleteIfExists(Paths.get(filePath));
+        } catch (IOException e) {
+            System.out.println("[ERROR] [DELETE] An unhandled error occurred while deleting file");
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteFolder(String folderPath) {
+        try {
+            FileUtils.deleteDirectory(new File(folderPath));
+        } catch (IOException e) {
+            System.out.println("[ERROR] [DELETE] An unhandled error occurred while deleting file");
+            e.printStackTrace();
+        }
+    }
+
 }
